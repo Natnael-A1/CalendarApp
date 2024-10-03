@@ -84,6 +84,7 @@ fun WelcomePageUi() {
                 text = stringResource(R.string.login_text),
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Bold,
+                color = LoginButtonBlue
             )
         }
     }
