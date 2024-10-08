@@ -1,4 +1,4 @@
-package org.calendarapp.project.login
+package org.calendarapp.project.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,11 +33,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.calendarapp.project.R
-import org.calendarapp.project.Ui.LoginButtonBlue
+import org.calendarapp.project.ui.LoginButtonBlue
 
 @Composable
 fun LoginPageUi() {
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
@@ -76,8 +76,8 @@ fun LoginPageUi() {
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
             OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
+                value = email,
+                onValueChange = { email = it },
                 label = { Text(stringResource(R.string.login_email)) },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.Black,
