@@ -2,6 +2,7 @@ package org.calendarapp.project.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +25,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import org.calendarapp.project.R
+import org.calendarapp.project.navigation.Login
+import org.calendarapp.project.navigation.Register
 import org.calendarapp.project.ui.LoginButtonBlue
 
 @Composable
-fun WelcomePageUi() {
+fun WelcomePageUi(navToLogin: () -> Unit, navToRegister: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,7 +64,7 @@ fun WelcomePageUi() {
                 .align(Alignment.CenterHorizontally)
         )
         Button(
-            onClick = {},
+            onClick = navToLogin,
             colors = ButtonDefaults.buttonColors(LoginButtonBlue),
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
@@ -69,19 +73,24 @@ fun WelcomePageUi() {
         ) {
             Text(
                 text = stringResource(R.string.login_get_started_btn_text),
-                modifier = Modifier.padding(horizontal = 12.dp),
+                modifier = Modifier
+                    .padding(horizontal = 12.dp),
                 color = Color.White,
-                fontFamily = FontFamily.Serif
+                fontFamily = FontFamily.Serif,
             )
         }
         Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
-            Text(text = stringResource(R.string.login_create_an_account_text))
+            Text(text = stringResource(R.string.login_dont_have_an_account_text))
             Spacer(modifier = Modifier.padding(horizontal = 2.dp))
             Text(
-                text = stringResource(R.string.login_text),
+                text = stringResource(R.string.sign_up_text),
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Bold,
-                color = LoginButtonBlue
+                color = LoginButtonBlue,
+                modifier = Modifier
+                    .clickable {
+                        navToRegister()
+                    }
             )
         }
     }
@@ -90,5 +99,5 @@ fun WelcomePageUi() {
 @Preview
 @Composable
 fun WelcomePageUiPreview() {
-    WelcomePageUi()
+    WelcomePageUi(navToLogin = {}, navToRegister = {})
 }

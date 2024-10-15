@@ -1,4 +1,4 @@
-package org.calendarapp.project.calendar
+package org.calendarapp.project.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 
 @Preview
 @Composable
-fun CalendarUi(navController: NavHostController) {
+fun SettingUi(navController: NavHostController) {
     Column {
         Text(text = "Calendar")
     }

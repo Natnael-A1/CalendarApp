@@ -3,9 +3,8 @@ package org.calendarapp.project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import org.calendarapp.project.home.HomeUi
+import org.calendarapp.project.navigation.navigation
 import org.calendarapp.project.ui.PersonalProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,16 +12,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PersonalProjectTheme {
-                HomeUi()
+                navigation()
             }
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun AppAndroidPreview() {
-//    PersonalProjectTheme {
-//        HomeUi()
-//    }
-//}

@@ -2,6 +2,7 @@ package org.calendarapp.project.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,11 +33,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import org.calendarapp.project.R
+import org.calendarapp.project.navigation.Register
 import org.calendarapp.project.ui.LoginButtonBlue
 
 @Composable
-fun LoginPageUi() {
+fun LoginPageUi(navToHome: () -> Unit, navToRegister: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column(
@@ -112,7 +115,7 @@ fun LoginPageUi() {
                     .padding(top = 16.dp)
             )
             Button(
-                onClick = {},
+                onClick = navToHome,
                 colors = ButtonDefaults.buttonColors(LoginButtonBlue),
                 modifier = Modifier
                     .align(alignment = Alignment.CenterHorizontally)
@@ -134,7 +137,8 @@ fun LoginPageUi() {
                 text = stringResource(R.string.sign_up_text),
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Bold,
-                color = LoginButtonBlue
+                color = LoginButtonBlue,
+                modifier = Modifier.clickable { navToRegister() }
             )
         }
     }
@@ -143,5 +147,5 @@ fun LoginPageUi() {
 @Composable
 @Preview
 fun LoginPageUiPreview() {
-    LoginPageUi()
+    LoginPageUi(navToHome = {}, navToRegister = {})
 }

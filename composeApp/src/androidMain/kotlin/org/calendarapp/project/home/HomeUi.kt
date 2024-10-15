@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
@@ -13,19 +12,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import org.calendarapp.project.navigation.NavGraph
+import org.calendarapp.project.navigation.NavInsideApp
+import org.calendarapp.project.navigation.navigation
 
 @Composable
 fun HomeUi() {
-    val navController = rememberNavController()
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Scaffold(topBar = { HeaderUI() },
             bottomBar = {
+                val navController = rememberNavController()
                 BottomMenu(navController = navController)
             }, content = { PaddingValues ->
                 Column(
@@ -36,7 +35,7 @@ fun HomeUi() {
                         .background(Color.White)
                         .padding(PaddingValues)
                 ) {
-                    NavGraph(navController = navController)
+                    NavInsideApp
                 }
             }
         )
@@ -44,8 +43,9 @@ fun HomeUi() {
     }
 }
 
-@Preview
-@Composable
-fun HomeUiPreview(){
-    HomeUi()
-}
+
+//@Preview
+//@Composable
+//fun HomeUiPreview(){
+//    HomeUi()
+//}

@@ -21,54 +21,51 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import org.calendarapp.project.R
-import org.calendarapp.project.navigation.Screens
+import org.calendarapp.project.navigation.Calendar
+import org.calendarapp.project.navigation.Homepage
+import org.calendarapp.project.navigation.Settings
 
 sealed class BottomNavItem(
     var title: String,
     var clickedIcon: Int,
     var unClickedIcon: Int,
-    var route: String
+    var route: Any
 ) {
-    data object Home : BottomNavItem(
+    data object HomeNavItem : BottomNavItem(
         "Home",
         R.drawable.clicked_home,
         R.drawable.unclicked_home,
-        Screens.Home.route
+        Homepage
     )
 
-    data object Calendar : BottomNavItem(
+    data object CalendarNavItem : BottomNavItem(
         "Calendar",
         R.drawable.clicked_calendar,
         R.drawable.unclicked_calendar,
-        Screens.Calendar.route
+        Calendar
     )
 
-    data object Setting : BottomNavItem(
+    data object SettingNavItem : BottomNavItem(
         "Setting",
         R.drawable.clicked_setting,
         R.drawable.unclicked_setting,
-        Screens.Setting.route
+        Settings
     )
 }
 
 @Composable
 fun BottomMenu(
-    navController: NavHostController,
+    navController: NavController
 ) {
     val items = listOf(
-        BottomNavItem.Home,
-        BottomNavItem.Calendar,
-        BottomNavItem.Setting
+        BottomNavItem.HomeNavItem,
+        BottomNavItem.CalendarNavItem,
+        BottomNavItem.SettingNavItem
     )
 
-//    val initialSelectedItemIndex: Int = 0
-
-//    var selectedItemIndex by remember {
-//        mutableStateOf(initialSelectedItemIndex)
-//    }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -88,8 +85,8 @@ fun BottomMenu(
                     onItemClick = {
                         navController.navigate(item.route) {
 
-                            navController.graph.startDestinationRoute?.let { screen_route ->
-                                popUpTo(screen_route) {
+                            navController.graph.startDestinationRoute?.let { screenRoute ->
+                                popUpTo(screenRoute) {
                                     saveState = true
                                 }
                             }

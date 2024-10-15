@@ -2,6 +2,7 @@ package org.calendarapp.project.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,7 +38,7 @@ import org.calendarapp.project.R
 import org.calendarapp.project.ui.LoginButtonBlue
 
 @Composable
-fun SignUpPageUi(){
+fun SignUpPageUi(navToLogin: () -> Unit) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -149,13 +150,14 @@ fun SignUpPageUi(){
             }
         }
         Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
-            Text(text = stringResource(R.string.login_dont_have_an_account_text))
+            Text(text = stringResource(R.string.sign_up_already_have_an_account))
             Spacer(modifier = Modifier.padding(horizontal = 2.dp))
             Text(
-                text = stringResource(R.string.sign_up_text),
+                text = stringResource(R.string.login_text),
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Bold,
-                color = LoginButtonBlue
+                color = LoginButtonBlue,
+                modifier = Modifier.clickable { navToLogin() }
             )
         }
     }
@@ -164,5 +166,5 @@ fun SignUpPageUi(){
 @Preview
 @Composable
 fun SignUpPageUiPreview() {
-    SignUpPageUi()
+    SignUpPageUi(navToLogin = {})
 }
