@@ -1,4 +1,4 @@
-package org.calendarapp.project.home
+package org.calendarapp.project.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,35 +24,32 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import org.calendarapp.project.R
-import org.calendarapp.project.navigation.Calendar
-import org.calendarapp.project.navigation.Homepage
-import org.calendarapp.project.navigation.Settings
 
 sealed class BottomNavItem(
     var title: String,
     var clickedIcon: Int,
     var unClickedIcon: Int,
-    var route: Any
+    var route: String
 ) {
     data object HomeNavItem : BottomNavItem(
         "Home",
         R.drawable.clicked_home,
         R.drawable.unclicked_home,
-        Homepage
+        InAppNavigationObjects.Homepage.route
     )
 
     data object CalendarNavItem : BottomNavItem(
         "Calendar",
         R.drawable.clicked_calendar,
         R.drawable.unclicked_calendar,
-        Calendar
+        InAppNavigationObjects.Calendar.route
     )
 
     data object SettingNavItem : BottomNavItem(
         "Setting",
         R.drawable.clicked_setting,
         R.drawable.unclicked_setting,
-        Settings
+        InAppNavigationObjects.Settings.route
     )
 }
 
@@ -78,13 +75,12 @@ fun BottomMenu(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            items.forEach { item ->
+            items.map { item ->
                 BottomMenuItem(
                     item = item,
                     isSelected = currentRoute == item.route,
                     onItemClick = {
                         navController.navigate(item.route) {
-
                             navController.graph.startDestinationRoute?.let { screenRoute ->
                                 popUpTo(screenRoute) {
                                     saveState = true
